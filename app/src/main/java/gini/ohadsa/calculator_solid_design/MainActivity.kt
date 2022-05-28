@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import gini.ohadsa.calculator_solid_design.databinding.ActivityMainBinding
-import kotlin.math.*
+import gini.ohadsa.calculator_solid_design.models.ScientificCalculator
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,54 +21,23 @@ class MainActivity : AppCompatActivity() {
             binding.editResult.text = value
         }
 
-    //every UI can choose its own operations
-    private var operations = mutableMapOf<String, MathOperation>()
-    init {
-        //const
-        operations["AC"] = MathOperation.ConstC { 0.0 }
-        operations["e"] = MathOperation.ConstC { E }
-        operations["π"] = MathOperation.ConstC { PI }
-        //unary
-        operations["-/+"] = MathOperation.Unary { x -> -1 * x }
-        operations["√"] = MathOperation.Unary { x -> sqrt(x) }
-        operations["%"] = MathOperation.Unary { x -> x / 100 }
-        operations["x²"] = MathOperation.Unary { x -> x * x }
-        operations["x³"] = MathOperation.Unary { x -> x * x * x }
-        operations["x⁻¹"] = MathOperation.Unary { x -> 1 / x }
-        operations["sin"] = MathOperation.Unary { x -> sin(x) }
-        operations["tan"] = MathOperation.Unary { x -> tan(x) }
-        operations["cos"] = MathOperation.Unary { x -> cos(x) }
-        operations["sin⁻¹"] = MathOperation.Unary { x -> asin(x) }
-        operations["cos⁻¹"] = MathOperation.Unary { x -> acos(x) }
-        operations["tan⁻¹"] = MathOperation.Unary { x -> atan(x) }
-        operations["ln"] = MathOperation.Unary { x -> ln(x) }
-        operations["eˣ"] = MathOperation.Unary { x -> E.pow(x) }
-        //binary
-        operations["+"] = MathOperation.Binary { x, y -> x + y }
-        operations["-"] = MathOperation.Binary { x, y -> x - y }
-        operations["x"] = MathOperation.Binary { x, y -> x * y }
-        operations["÷"] = MathOperation.Binary { x, y -> x / y }
-        operations["xʸ"] = MathOperation.Binary { x, y -> x.pow(y) }
-        //equals
-        operations["="] = MathOperation.Equals
 
-    }
-
-    private var calc = CalculatorBrain(operations)
+    private var calc = ScientificCalculator()
+    private lateinit var operations : List<CharSequence>
+    private lateinit var digitsAndDot : List<CharSequence>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        operations  = binding.opGroup.referencedIds.map { findViewById<Button>(it).text }
+        digitsAndDot = binding.digitGroup.referencedIds.map { findViewById<Button>(it).text }
         val buttons: List<Button> = (binding.flowBtn.referencedIds.map(this::findViewById))
         buttons.forEach { it.setOnClickListener(this::buttonsRouter) }
     }
 
 
     private fun buttonsRouter(view: View) {
-        val operations = binding.opGroup.referencedIds.map { findViewById<Button>(it).text }
-        val digitsAndDot = binding.digitGroup.referencedIds.map { findViewById<Button>(it).text }
-        println(operations.toString())
         var result = ""
         with(view as Button) {
             result = when (view.text) {

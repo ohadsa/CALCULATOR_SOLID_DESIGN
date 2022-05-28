@@ -271,7 +271,7 @@
 
     <Button
         android:id="@+id/button_mul"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="@color/orange"

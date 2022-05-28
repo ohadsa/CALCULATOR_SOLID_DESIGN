@@ -1,18 +1,18 @@
-package gini.ohadsa.calculator_solid_design
+package gini.ohadsa.calculator_solid_design.models
 
 
 import android.os.Bundle
 
-
-class CalculatorBrain(private val operations : MutableMap<String, MathOperation>) {
+abstract class CalculatorBrain(private val operations: MutableMap<String, MathOperation>) {
 
     // props ->
     private var memoryCalculator = CalcMemory()// struct-> display, pending: Double, operand: String
     private var prevPress = PreviousPressType.NUM //know the last taped to ignore exec multiple op
     private var existPendingOperation = false //can be only binary operation
     private var isEditingMode = false // field that show when to start write new number
-
-
+    init {
+        this.operations["="] = MathOperation.Equals
+    }
     //calculate props from memoryCalculator - can be useful for formatting and alike
     private var pendingValue: Double
         get() = this.memoryCalculator.pendingValue
@@ -89,15 +89,15 @@ class CalculatorBrain(private val operations : MutableMap<String, MathOperation>
      */
     private fun performPendingOperation(_display: String): String {
         if (prevPress != PreviousPressType.OP) {
-            displayedValue = performOperation(_display).toDouble()
+            displayedValue = performOperation(_display)
             pendingValue = _display.toDouble()
             existPendingOperation = false
-            return displayedValue.toString()
+            return "$displayedValue"
         }
         return _display
     }
 
-    private fun performOperation(display: String): String {
+    private fun performOperation(display: String): Double {
         val op = operations[operand] ?: throw RuntimeException("Operator $operand not exist")
         val result: Double = when (op) {
             is MathOperation.ConstC -> op.op.constFunc()
@@ -105,8 +105,9 @@ class CalculatorBrain(private val operations : MutableMap<String, MathOperation>
             is MathOperation.Binary -> op.op.binFunc(pendingValue, display.toDouble())
             is MathOperation.Equals -> display.toDouble()
         }
-        return "%.${4}f".format(result)
+        return result
     }
+
 
     /*
     private methods that helps  operationClicked() to update memory state
@@ -114,7 +115,7 @@ class CalculatorBrain(private val operations : MutableMap<String, MathOperation>
      */
     private fun unaryOpMemoryHandler(_display: String, newOperation: String) {
         operand = newOperation
-        displayedValue = performOperation(_display).toDouble()
+        displayedValue = performOperation(_display)
         pendingValue = displayedValue
         prevPress = PreviousPressType.OP
     }
@@ -123,11 +124,11 @@ class CalculatorBrain(private val operations : MutableMap<String, MathOperation>
         if (existPendingOperation) {
             val tmpOp = operand
             operand = newOperation
-            displayedValue = performOperation(_display).toDouble()
+            displayedValue = performOperation(_display)
             operand = tmpOp
         } else {
             operand = newOperation
-            displayedValue = performOperation(_display).toDouble()
+            displayedValue = performOperation(_display)
         }
         prevPress = PreviousPressType.CONST
     }
@@ -145,10 +146,14 @@ class CalculatorBrain(private val operations : MutableMap<String, MathOperation>
         displayedValue = pendingValue
         prevPress = PreviousPressType.EQUALS
     }
+
+
+
+
 }
 
 
-enum class PreviousPressType { OP, EQUALS, NUM , CONST }
+enum class PreviousPressType { OP, EQUALS, NUM, CONST }
 data class CalcMemory(
     //initial default memory
     var displayedValue: Double = 0.0,
@@ -174,6 +179,7 @@ fun interface UnaryFunc {
 fun interface ConstFunc {
     fun constFunc(): Double
 }
+
 
 
 
