@@ -55,10 +55,6 @@ class CalculatorBrain(private val operations : MutableMap<String, MathOperation>
         }
 
 
-    //operations init -> to add ome more operation just add one line that describe the op here
-
-
-
     /*
     the only public methods digitClicked, dotClicked, operationClicked
     to update the memory and execute the operations . returns state -> the display
