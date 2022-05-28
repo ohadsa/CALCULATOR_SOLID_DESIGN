@@ -7,7 +7,7 @@ import android.os.Bundle
 class CalculatorBrain(private val operations : MutableMap<String, MathOperation>) {
 
     // props ->
-    private var memoryCalculator = CalcMemory()// struct-> memory1, memory2: Double, operand: String
+    private var memoryCalculator = CalcMemory()// struct-> desplay, pending: Double, operand: String
     private var prevPress = PreviousPressType.NUM //know the last taped to ignore exec multiple op
     private var existPendingOperation = false //can be only binary operation
     private var isEditingMode = false // field that show when to start write new number
