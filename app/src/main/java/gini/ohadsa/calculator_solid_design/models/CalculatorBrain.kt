@@ -10,6 +10,7 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
     private var prevPress = PreviousPressType.NUM //know the last taped to ignore exec multiple op
     private var existPendingOperation = false //can be only binary operation
     private var isEditingMode = false // field that show when to start write new number
+
     init {
         this.operations["="] = MathOperation.Equals
     }
@@ -70,7 +71,7 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
         return display
     }
 
-    fun operationClicked(newOperation: String, _display: String): Double {
+    fun operationClicked(newOperation: String, _display: String): String {
         val op = operations[newOperation] ?: throw RuntimeException("Operator $operand not exist")
         var display = _display
         if (existPendingOperation) display = performPendingOperation(display)
@@ -81,38 +82,13 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
             is MathOperation.Unary -> unaryOpMemoryHandler(display, newOperation)
         }
         isEditingMode = false
-        return displayedValue
+        return "$displayedValue"
     }
-
-    /*
-    perform op and pending op
-     */
-    private fun performPendingOperation(_display: String): String {
-        if (prevPress != PreviousPressType.OP) {
-            displayedValue = performOperation(_display)
-            pendingValue = _display.toDouble()
-            existPendingOperation = false
-            return "$displayedValue"
-        }
-        return _display
-    }
-
-    private fun performOperation(display: String): Double {
-        val op = operations[operand] ?: throw RuntimeException("Operator $operand not exist")
-        val result: Double = when (op) {
-            is MathOperation.ConstC -> op.op.constFunc()
-            is MathOperation.Unary -> op.op.unFunc(display.toDouble())
-            is MathOperation.Binary -> op.op.binFunc(pendingValue, display.toDouble())
-            is MathOperation.Equals -> display.toDouble()
-        }
-        return result
-    }
-
 
     /*
     private methods that helps  operationClicked() to update memory state
     in every operations that enter( bin , un , const, equals) memory change different
-     */
+    */
     private fun unaryOpMemoryHandler(_display: String, newOperation: String) {
         operand = newOperation
         displayedValue = performOperation(_display)
@@ -147,9 +123,29 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
         prevPress = PreviousPressType.EQUALS
     }
 
+    /*
+    perform op and pending op
+     */
+    private fun performPendingOperation(_display: String): String {
+        if (prevPress != PreviousPressType.OP) {
+            displayedValue = performOperation(_display)
+            pendingValue = _display.toDouble()
+            existPendingOperation = false
+            return "$displayedValue"
+        }
+        return _display
+    }
 
-
-
+    private fun performOperation(display: String): Double {
+        val op = operations[operand] ?: throw RuntimeException("Operator $operand not exist")
+        val result: Double = when (op) {
+            is MathOperation.ConstC -> op.op.constFunc()
+            is MathOperation.Unary -> op.op.unFunc(display.toDouble())
+            is MathOperation.Binary -> op.op.binFunc(pendingValue, display.toDouble())
+            is MathOperation.Equals -> display.toDouble()
+        }
+        return result
+    }
 }
 
 
@@ -166,19 +162,21 @@ sealed class MathOperation {
     class Unary(val op: UnaryFunc) : MathOperation()
     class ConstC(val op: ConstFunc) : MathOperation()
     object Equals : MathOperation()
+
+    fun interface BinFunc {
+        fun binFunc(firstNum: Double, lastNum: Double): Double
+    }
+
+    fun interface UnaryFunc {
+        fun unFunc(firstNum: Double): Double
+    }
+
+    fun interface ConstFunc {
+        fun constFunc(): Double
+    }
 }
 
-fun interface BinFunc {
-    fun binFunc(firstNum: Double, lastNum: Double): Double
-}
 
-fun interface UnaryFunc {
-    fun unFunc(firstNum: Double): Double
-}
-
-fun interface ConstFunc {
-    fun constFunc(): Double
-}
 
 
 

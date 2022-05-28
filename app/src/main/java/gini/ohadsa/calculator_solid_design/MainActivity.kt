@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding
         get() = _binding!!
 
-    private var display: String
+    private var displayedValue: String
         get() = binding.editResult.text.toString()
         set(value) {
             binding.editResult.text = value
@@ -23,14 +23,14 @@ class MainActivity : AppCompatActivity() {
 
 
     private var calc = ScientificCalculator()
-    private lateinit var operations : List<CharSequence>
-    private lateinit var digitsAndDot : List<CharSequence>
+    private lateinit var operations: List<CharSequence>
+    private lateinit var digitsAndDot: List<CharSequence>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        operations  = binding.opGroup.referencedIds.map { findViewById<Button>(it).text }
+        operations = binding.opGroup.referencedIds.map { findViewById<Button>(it).text }
         digitsAndDot = binding.digitGroup.referencedIds.map { findViewById<Button>(it).text }
         val buttons: List<Button> = (binding.flowBtn.referencedIds.map(this::findViewById))
         buttons.forEach { it.setOnClickListener(this::buttonsRouter) }
@@ -38,24 +38,17 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun buttonsRouter(view: View) {
-        var result = ""
+        var result = "0"
         with(view as Button) {
-            result = when (view.text) {
-                in digitsAndDot -> digitTapped(this)
-                in operations -> operandTapped(this)
+            val op = "$text"
+            result = when (op) {
+                in digitsAndDot -> calc.digitClicked("$text", displayedValue)
+                in operations -> calc.operationClicked("$text", displayedValue)
                 else -> throw RuntimeException("Input error")
             }
         }
-        display = result
+        displayedValue = result
     }
-
-
-    private fun operandTapped(button: Button): String =
-        calc.operationClicked(button.text.toString(), display).toString()
-
-    private fun digitTapped(digit: Button): String =
-        calc.digitClicked(digit.text.toString(), display)
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -63,14 +56,13 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-
         calc.state = savedInstanceState
-        display = savedInstanceState.getString("display",display)?:"0"
+        displayedValue = savedInstanceState.getString("display", displayedValue) ?: "0"
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putAll(calc.state)
-        outState.putString("display" , display)
+        outState.putString("display", displayedValue)
 
     }
 }
