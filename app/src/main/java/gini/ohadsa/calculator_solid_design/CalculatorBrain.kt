@@ -2,7 +2,6 @@ package gini.ohadsa.calculator_solid_design
 
 
 import android.os.Bundle
-import kotlin.math.*
 
 
 class CalculatorBrain(private val operations : MutableMap<String, MathOperation>) {

@@ -33,5 +33,7 @@
     <string name="cos_pow_01">cos⁻¹</string>
     <string name="tan_pow_01">tan⁻¹</string>
     <string name="sin_pow_01">sin⁻¹</string>
+    <string name="button_x_pow_y">xʸ</string>
+    <string name="button_e_pow_x">eˣ</string>
 
 </resources>
