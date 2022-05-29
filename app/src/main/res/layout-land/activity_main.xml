@@ -192,8 +192,6 @@
         android:text="@string/_pi"
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_result"
         app:strokeColor="@color/strong_grey"
         app:strokeWidth="0.5dp" />
 
@@ -210,8 +208,6 @@
         android:text="@string/_e"
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_result"
         app:strokeColor="@color/strong_grey"
         app:strokeWidth="0.5dp" />
 
@@ -228,8 +224,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="103dp" />
+        app:strokeWidth="0.5dp"/>
 
 
     <Button
@@ -245,8 +240,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_x_pow_3"
@@ -261,8 +255,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp" />
+        app:strokeWidth="0.5dp"/>
 
 
 
@@ -279,8 +272,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp" />
+        app:strokeWidth="0.5dp" />
     <Button
         android:id="@+id/button_cos"
         android:textSize="18sp"
@@ -294,8 +286,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp" />
+        app:strokeWidth="0.5dp"/>
     <Button
         android:id="@+id/button_tan"
         android:textSize="18sp"
@@ -380,8 +371,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="346dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_e_pow_x"
@@ -395,9 +385,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="346dp" />
+        app:strokeWidth="0.5dp" />
     <Button
         android:id="@+id/button_sin"
         android:textSize="18sp"
@@ -413,9 +401,6 @@
         app:strokeColor="@color/strong_grey"
         app:strokeWidth="0.5dp" />
 
-
-
-
     <Button
         android:id="@+id/button_ac"
         android:textSize="18sp"
@@ -429,7 +414,6 @@
         android:text="@string/_ac"
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/strong_grey"
         app:strokeWidth="0.5dp" />
 

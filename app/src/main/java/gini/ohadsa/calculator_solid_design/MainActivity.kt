@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity() {
             binding.editResult.text = value
         }
 
-
-    private var calc = ScientificCalculator()
+    private var calculator = ScientificCalculator()
     private lateinit var operations: List<CharSequence>
     private lateinit var digitsAndDot: List<CharSequence>
 
@@ -36,14 +35,13 @@ class MainActivity : AppCompatActivity() {
         buttons.forEach { it.setOnClickListener(this::buttonsRouter) }
     }
 
-
     private fun buttonsRouter(view: View) {
         var result = "0"
         with(view as Button) {
             val op = "$text"
             result = when (op) {
-                in digitsAndDot -> calc.digitClicked("$text", displayedValue)
-                in operations -> calc.operationClicked("$text", displayedValue)
+                in digitsAndDot -> calculator.digitClicked("$text", displayedValue)
+                in operations -> calculator.operationClicked("$text", displayedValue)
                 else -> throw RuntimeException("Input error")
             }
         }
@@ -56,12 +54,12 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        calc.state = savedInstanceState
+        calculator.state = savedInstanceState
         displayedValue = savedInstanceState.getString("display", displayedValue) ?: "0"
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putAll(calc.state)
+        outState.putAll(calculator.state)
         outState.putString("display", displayedValue)
 
     }

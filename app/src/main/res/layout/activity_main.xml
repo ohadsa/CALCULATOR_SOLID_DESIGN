@@ -45,9 +45,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="366dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_2"
@@ -61,9 +59,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="606dp" />
+        app:strokeWidth="0.5dp" />
 
 
     <Button
@@ -78,9 +74,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="606dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_4"
@@ -97,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/strong_grey"
         app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="463dp" />
+        />
 
     <Button
         android:id="@+id/button_5"
@@ -112,8 +106,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
         app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="463dp" />
+        />
 
 
     <Button
@@ -128,9 +121,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="463dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_7"
@@ -146,8 +137,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_8"
@@ -161,9 +151,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_9"
@@ -177,9 +165,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:strokeWidth="0.5dp"/>
 
 
     <Button
@@ -194,8 +180,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="2"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="416dp" />
+        app:strokeWidth="0.5dp" />
 
 
     <Button
@@ -231,8 +216,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/edit_result"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="103dp" />
+        app:strokeWidth="0.5dp" />
 
 
     <Button
@@ -249,8 +233,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/edit_result"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp" />
+        app:strokeWidth="0.5dp"/>
 
     <Button
         android:id="@+id/button_div"
@@ -266,8 +249,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/edit_result"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="308dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_mul"
@@ -281,9 +263,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="308dp"
-        tools:layout_editor_absoluteY="321dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_minus"
@@ -297,9 +277,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="308dp"
-        tools:layout_editor_absoluteY="463dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_plus"
@@ -313,9 +291,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="308dp"
-        tools:layout_editor_absoluteY="606dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_equals"
@@ -329,9 +305,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="308dp"
-        tools:layout_editor_absoluteY="749dp" />
+        app:strokeWidth="0.5dp" />
 
     <Button
         android:id="@+id/button_dot"
@@ -345,9 +319,7 @@
         app:cornerRadius="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:strokeColor="@color/strong_grey"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="620dp" />
+        app:strokeWidth="0.5dp" />
 
 
     <androidx.constraintlayout.helper.widget.Flow

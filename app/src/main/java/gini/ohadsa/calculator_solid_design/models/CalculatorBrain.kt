@@ -36,10 +36,9 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
     // for switching between portrait and landscape, build and extract bundle from get/set
     var state: Bundle
         get() {
-            //maybe better to do parcelable  ??
             val bundle = Bundle()
-            bundle.putDouble("memory1", displayedValue)
-            bundle.putDouble("memory2", pendingValue)
+            bundle.putDouble("displayedValue", displayedValue)
+            bundle.putDouble("pendingValue", pendingValue)
             bundle.putString("operand", operand)
             bundle.putInt("prevPress", prevPress.ordinal)
             bundle.putBoolean("existPendingOperation", existPendingOperation)
@@ -47,8 +46,8 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
             return bundle
         }
         set(value) {
-            displayedValue = value.getDouble("memory1")
-            pendingValue = value.getDouble("memory2")
+            displayedValue = value.getDouble("displayedValue")
+            pendingValue = value.getDouble("pendingValue")
             operand = value.getString("operand") ?: "="
             prevPress = PreviousPressType.values()[value.getInt("prevPress")]
             existPendingOperation = value.getBoolean("existPendingOperation")
@@ -57,7 +56,7 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
 
 
     /*
-    the only public methods digitClicked, dotClicked, operationClicked
+    the only public methods digitClicked, operationClicked
     to update the memory and execute the operations . returns state -> the display
     can be 2 ways to tap in calculator -
         digit or dot clicked - to creating number
@@ -73,7 +72,7 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
 
     fun operationClicked(newOperation: String, _display: String): String {
         val op = operations[newOperation] ?: throw RuntimeException("Operator $operand not exist")
-        var display = _display
+        var display = _display.trim()
         if (existPendingOperation) display = performPendingOperation(display)
         when (op) {
             is MathOperation.Equals -> equalsOpMemoryHandler(display)
@@ -150,8 +149,9 @@ abstract class CalculatorBrain(private val operations: MutableMap<String, MathOp
 
 
 enum class PreviousPressType { OP, EQUALS, NUM, CONST }
+
 data class CalcMemory(
-    //initial default memory
+    //initial default memory , put performPending inside this class
     var displayedValue: Double = 0.0,
     var pendingValue: Double = 0.0,
     var operand: String = "=",
