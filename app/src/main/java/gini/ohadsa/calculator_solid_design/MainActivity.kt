@@ -23,30 +23,27 @@ class MainActivity : AppCompatActivity() {
             binding.editResult.text = value
         }
 
-    private var calculator : CalculatorBrain = ScientificCalculator()
-    private lateinit var operations: List<CharSequence>
-    private lateinit var digitsAndDot: List<CharSequence>
+    private var calculator: CalculatorBrain = ScientificCalculator()
+    private lateinit var operations: List<String>
+    private lateinit var digitsAndDot: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        operations = binding.opGroup.referencedIds.map { findViewById<Button>(it).text }
-        // TODO range 0..9 and dot
-        digitsAndDot = binding.digitGroup.referencedIds.map { findViewById<Button>(it).text }
+        operations = binding.opGroup.referencedIds.map { "${findViewById<Button>(it).text}"  }
+        digitsAndDot = binding.digitGroup.referencedIds.map { "${findViewById<Button>(it).text}" }
         val buttons: List<Button> = (binding.flowBtn.referencedIds.map(this::findViewById))
         buttons.forEach { it.setOnClickListener(this::buttonsRouter) }
     }
 
     private fun buttonsRouter(view: View) {
-        var result = "0"
-        with(view as Button) {
-            val op = "$text"
-            result = when (op) {
-                in digitsAndDot -> calculator.digitClicked("$text", displayedValue)
-                in operations -> calculator.operationClicked("$text", displayedValue)
-                else -> throw RuntimeException("Input error")
-            }
+        val result :String?
+        val op = "${(view as Button).text}"
+        result = when (op) {
+            in digitsAndDot -> calculator.digitClicked(op, displayedValue)
+            in operations -> calculator.operationClicked(op, displayedValue)
+            else -> throw RuntimeException("Input error")
         }
         displayedValue = result
     }
