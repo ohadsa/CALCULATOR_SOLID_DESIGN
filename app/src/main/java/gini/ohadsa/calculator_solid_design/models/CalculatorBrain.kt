@@ -4,7 +4,7 @@ package gini.ohadsa.calculator_solid_design.models
 import android.os.Bundle
 
 abstract class CalculatorBrain(private val operations: MutableMap<String, MathOperation>) {
-
+    // mathematics operations in the calculator
     // props ->
     private var memoryCalculator = CalcMemory()// struct-> display, pending: Double, operand: String
     private var prevPress = PreviousPressType.NUM //know the last taped to ignore exec multiple op

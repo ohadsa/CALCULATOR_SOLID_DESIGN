@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import gini.ohadsa.calculator_solid_design.databinding.ActivityMainBinding
+import gini.ohadsa.calculator_solid_design.models.CalculatorBrain
 import gini.ohadsa.calculator_solid_design.models.ScientificCalculator
 
 
 class MainActivity : AppCompatActivity() {
-
+    //TODO number format
+    // activity - find views, set on .. listener, talk to brain get result and displayed it, save the state
     private var _binding: ActivityMainBinding? = null
     private val binding: ActivityMainBinding
         get() = _binding!!
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             binding.editResult.text = value
         }
 
-    private var calculator = ScientificCalculator()
+    private var calculator : CalculatorBrain = ScientificCalculator()
     private lateinit var operations: List<CharSequence>
     private lateinit var digitsAndDot: List<CharSequence>
 
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         operations = binding.opGroup.referencedIds.map { findViewById<Button>(it).text }
+        // TODO range 0..9 and dot
         digitsAndDot = binding.digitGroup.referencedIds.map { findViewById<Button>(it).text }
         val buttons: List<Button> = (binding.flowBtn.referencedIds.map(this::findViewById))
         buttons.forEach { it.setOnClickListener(this::buttonsRouter) }
@@ -61,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState.putAll(calculator.state)
         outState.putString("display", displayedValue)
-
     }
 }
 
